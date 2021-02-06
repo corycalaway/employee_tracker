@@ -14,8 +14,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "schema": "source db/schema.sql",
-    "seed": "source db/seed.sql"
+    "schema": "mysql --password=ccPOKEMONCC??",
+    "seed": "mysql db/seed.sql"
   },
   "repository": {
     "type": "git",

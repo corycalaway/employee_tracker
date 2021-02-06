@@ -1,4 +1,6 @@
 const mysql = require('mysql2');
+const cTable = require('console.table');
+const inquirer = require('inquirer');
 
 // Creates the connection to database
 const connection = mysql.createConnection({
@@ -21,6 +23,7 @@ afterConnection = () => {
   connection.query('SELECT * FROM employee', function(err, res) {
     if (err) throw err;
     console.log(res);
+    console.table(res)
     connection.end();
   });
 };
