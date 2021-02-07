@@ -16,3 +16,4 @@ FROM employee
   INNER JOIN department ON roles.department_id = department.id
   ORDER BY roles.title ASC;
  
+ SELECT * FROM department;

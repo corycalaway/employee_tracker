@@ -9,6 +9,7 @@ class Database {
     // function to add a department db
     addDepartment() {
 
+        
     }
 
     // function to add a role to db
@@ -28,10 +29,20 @@ class Database {
 
     // view all departments function
     viewDepartments() {
-
+        return `SELECT * FROM department;`
     }
 
     // view all roles function
+    viewRoles() {
+
+        return   `SELECT employee.role_id, roles.title, department.department_name, roles.salary,
+              FROM employee
+              INNER JOIN roles ON employee.role_id = roles.id
+              INNER JOIN department ON roles.department_id = department.id
+              ORDER BY roles.title ASC;`
+
+    }
+    // view all emplohees function
     viewEmployees() {
 
         
