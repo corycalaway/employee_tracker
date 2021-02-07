@@ -30,7 +30,7 @@ const connection = mysql.createConnection({
 
 class Aplication {
   constructor() {
-
+    this.search
   }
 
 //   startApp() {
@@ -72,8 +72,11 @@ dbQuestions() {
         switch (answer.DBOptions) {
           case "View all departments":
             console.log(answer.DBOptions)
-            afterConnection();
+            // afterConnection();
             // return connection.end();
+            this.search = new Database().viewEmployees();
+            console.log(this.search)
+           this.afterConnection();
 
           case "View all roles":
             console.log(answer.DBOptions)
@@ -118,20 +121,25 @@ dbQuestions() {
       });
 }
 
-
-}
-afterConnection = () => {
-  connection.query(`SELECT employee.first_name, employee.last_name, roles.title, roles.salary, department.department_name
-  FROM employee
-    INNER JOIN roles ON employee.role_id = roles.id
-    INNER JOIN department ON roles.department_id = department.id
-    ORDER BY roles.title ASC;`, function(err, res) {
+afterConnection() {
+  connection.query(this.search, function(err, res) {
     if (err) throw err;
     console.log(res);
     console.table(res)
     connection.end();
   });
-};
+}
+}
+
+// sample join
+// afterConnection = (search) => {
+//   connection.query(search, function(err, res) {
+//     if (err) throw err;
+//     console.log(res);
+//     console.table(res)
+//     connection.end();
+//   });
+// };
 
 // `SELECT id, first_name, last_name 
 //   FROM employee

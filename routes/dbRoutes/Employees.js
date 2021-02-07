@@ -1,8 +1,10 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 
+
+
 class Database {
-    constructor(){}
+    constructor() { }
 
     // function to add a department db
     addDepartment() {
@@ -31,6 +33,13 @@ class Database {
 
     // view all roles function
     viewEmployees() {
+
+        
+     return   `SELECT employee.first_name, employee.last_name, roles.title, roles.salary, department.department_name
+              FROM employee
+              INNER JOIN roles ON employee.role_id = roles.id
+              INNER JOIN department ON roles.department_id = department.id
+              ORDER BY roles.title ASC;`
 
     }
 }
