@@ -72,7 +72,8 @@ dbQuestions() {
         switch (answer.DBOptions) {
           case "View all departments":
             console.log(answer.DBOptions)
-            return connection.end();
+            afterConnection();
+            // return connection.end();
 
           case "View all roles":
             console.log(answer.DBOptions)
@@ -119,14 +120,18 @@ dbQuestions() {
 
 
 }
-// afterConnection = () => {
-//   connection.query(`SELECT * FROM employee`, function(err, res) {
-//     if (err) throw err;
-//     console.log(res);
-//     console.table(res)
-//     connection.end();
-//   });
-// };
+afterConnection = () => {
+  connection.query(`SELECT employee.first_name, employee.last_name, roles.title, roles.salary, department.department_name
+  FROM employee
+    INNER JOIN roles ON employee.role_id = roles.id
+    INNER JOIN department ON roles.department_id = department.id
+    ORDER BY roles.title ASC;`, function(err, res) {
+    if (err) throw err;
+    console.log(res);
+    console.table(res)
+    connection.end();
+  });
+};
 
 // `SELECT id, first_name, last_name 
 //   FROM employee
