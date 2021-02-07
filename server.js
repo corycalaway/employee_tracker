@@ -54,8 +54,69 @@ class Aplication {
 startApp(){
   console.log(logo({name: 'Employee Tracker',
 font: 'Speed'}).render());
-connection.end();
+this.dbQuestions();
+// connection.end();
 }
+
+dbQuestions() {
+  inquirer
+      .prompt({
+        type: "list",
+        name: "DBOptions",
+        message: "What would you like to do?",
+        choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add employee", "Update Employee", "EXIT"],
+      })
+      .then((answer) => {
+        
+
+        switch (answer.DBOptions) {
+          case "View all departments":
+            console.log(answer.DBOptions)
+            return connection.end();
+
+          case "View all roles":
+            console.log(answer.DBOptions)
+            return connection.end();
+
+          case "View all employees":
+            console.log(answer.DBOptions)
+            return connection.end();
+            
+          case "Add a department":
+            console.log(answer.DBOptions)
+            return connection.end();
+
+          case "Add a role":
+            console.log(answer.DBOptions)
+            return connection.end();
+
+          case "Add employee":
+            console.log(answer.DBOptions)
+            return connection.end();
+
+          case "Update Employee":
+            console.log(answer.DBOptions)
+            return connection.end();
+
+          case "EXIT":
+            console.log(answer.DBOptions)
+            return connection.end();
+        }
+        // if (answer.DBOptions === "Engineer") {
+        //   this.roleAssign = "Engineer";
+        //   this.caller = new Engineer();
+
+        //   return this.startApp();
+        // } else if (answer.DBOptions === "Intern") {
+        //   this.roleAssign = "Intern";
+        //   this.caller = new Intern();
+        //   return this.startApp();
+        // } else {
+        //   connection.end();
+        // }
+      });
+}
+
 
 }
 // afterConnection = () => {
