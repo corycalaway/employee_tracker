@@ -76,7 +76,7 @@ dbQuestions() {
             // return connection.end();
             this.search = new Database().viewDepartments();
             console.log(this.search)
-            this.afterConnection();
+            return this.afterConnection();
 
           case "View all roles":
             console.log(answer.DBOptions)
@@ -84,7 +84,7 @@ dbQuestions() {
             // return connection.end();
             this.search = new Database().viewRoles();
             console.log(this.search)
-            this.afterConnection();
+            return this.afterConnection();
 
           case "View all employees":
             console.log(answer.DBOptions)
@@ -92,7 +92,7 @@ dbQuestions() {
             // return connection.end();
             this.search = new Database().viewEmployees();
             console.log(this.search)
-            this.afterConnection();
+            return this.afterConnection();
             
           case "Add a department":
             console.log(answer.DBOptions)
@@ -134,7 +134,7 @@ afterConnection() {
     if (err) throw err;
     console.log(res);
     console.table(res)
-    this.dbQuestions();
+    new Aplication().dbQuestions();
   });
 }
 }

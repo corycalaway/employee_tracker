@@ -35,11 +35,11 @@ class Database {
     // view all roles function
     viewRoles() {
 
-        return   `SELECT employee.role_id, roles.title, department.department_name, roles.salary,
-              FROM employee
-              INNER JOIN roles ON employee.role_id = roles.id
-              INNER JOIN department ON roles.department_id = department.id
-              ORDER BY roles.title ASC;`
+        return   `SELECT employee.role_id, roles.title, roles.salary, department.department_name
+        FROM employee
+        INNER JOIN roles ON employee.role_id = roles.id
+        INNER JOIN department ON roles.department_id = department.id
+        ORDER BY roles.title ASC;`
 
     }
     // view all emplohees function
