@@ -80,7 +80,7 @@ class Database {
         return   `SELECT employee.role_id, roles.title, roles.salary, department.department_name
         FROM employee
         RIGHT JOIN roles ON employee.role_id = roles.id
-        RIGHT JOIN department ON roles.department_id = department.id
+        LEFT JOIN department ON roles.department_id = department.id
         ORDER BY roles.title ASC;`
 
     }

@@ -241,17 +241,19 @@ class Aplication {
         // console.log(roleInfo)
         // const [roleName, salary, department] = roleInfo;
         const [roleName, salary, department] = answer;
+        
         console.log(roleName.roleName)
-        console.log(salary)
-        console.log(department)
-        connection.query(`INSERT INTO roles SET ?, ?`,
+        console.log(salary.salary)
+        console.log(department.department)
+        connection.query(`INSERT INTO roles SET ?`,
           {
-            title: roleName.roleName,
-            salary: salary.salary
+            title: roleName.roleName
+            // salary: salary.salary
             // department_name: answer.department
           },
           function (err, res) {
             if (err) throw err;
+            
           }
   
         )
