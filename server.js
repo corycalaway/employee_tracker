@@ -86,6 +86,7 @@ class Aplication {
 
       case "View all roles":
         console.log(answer.DBOptions)
+        
         // afterConnection();
         // return connection.end();
         this.search = new Database().viewRoles();
@@ -101,9 +102,10 @@ class Aplication {
         return this.afterConnection();
 
       case "Add a department":
-        this.addInfo = new Database().addDepartment()
-        return connection.end();
-
+       return this.addInfo = new Database().addDepartment() 
+        .then((answer) => {
+        return this.afterConnectionAdd(answer);
+        })
       // console.log(answer.DBOptions)
       // inquirer.prompt({
       //   type: "input",
@@ -198,13 +200,14 @@ class Aplication {
     // }
     // }
 
-    afterConnectionAdd() {
-
+    afterConnectionAdd(answer) {
+console.log('you made it')
       // this.addInfo = new Database().addDepartment()
-
+      // connection.end();
+      console.log(answer)
       connection.query(`INSERT INTO department SET ?`,
         {
-          department_name: this.addInfo
+          department_name: answer
         },
         function (err, res) {
           if (err) throw err;
