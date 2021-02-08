@@ -129,19 +129,20 @@ class Aplication {
       // return this.afterConnectionAdd()
       //  console.log(this.addInfo);
       case "Add a role":
-        this.task = 'role'
+        this.task = 'roles'
         const departments = [];
         // let departments;
-       this.departments = connection.query(`SELECT department_name FROM department;`, function (err, res) {
-          if (err) throw err;
-       console.log(res)
-          // departments.push(res.sql)
-        })
+      //  this.departments = connection.query(`SELECT department_name FROM department;`, function (err, res) {
+      //     if (err) throw err;
+      //  console.log(res)
+      //     // departments.push(res.sql)
+      //   })
         // console.log(departments)
 
        return this.addInfo = new Database().addRole(this.departments) 
 
         .then((answer) => {
+          console.log(answer)
         return this.afterConnectionAdd(answer);
         })
 
@@ -236,10 +237,18 @@ class Aplication {
       )
 
       } else if (this.task === 'roles') {
-
-        connection.query(`INSERT INTO department SET ?`,
+        // let roleInfo = JSON.stringify(answer)
+        // console.log(roleInfo)
+        // const [roleName, salary, department] = roleInfo;
+        const [roleName, salary, department] = answer;
+        console.log(roleName.roleName)
+        console.log(salary)
+        console.log(department)
+        connection.query(`INSERT INTO roles SET ?, ?`,
           {
-            department_name: answer
+            title: roleName.roleName,
+            salary: salary.salary
+            // department_name: answer.department
           },
           function (err, res) {
             if (err) throw err;
