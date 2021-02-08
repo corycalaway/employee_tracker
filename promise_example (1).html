@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+</body>
+
+<script>
+
+
+function a(){
+    return new Promise((res, rej)=>{
+        console.log("a");
+        res("a");
+    });
+}
+
+function b(){
+    return new Promise((res, rej)=>{
+        // Just waiting to resolve b
+        setTimeout(()=>{
+            console.log("b");
+            res("b");
+        }, 1000);
+    });
+}
+
+function c(){
+    return new Promise((res, rej)=>{
+        // Just waiting to resolve c
+        setTimeout(()=>{
+            console.log("c");
+            res("c");
+        }, 4000);
+    });
+}
+
+
+
+// ex. run this with ask('b') or ask('c')
+function ask(prompt_answer){
+
+    return new Promise((res, rej)=>{
+        let result_prom;
+        switch(prompt_answer)
+        {
+            case "b":
+                result_prom = b();
+                break;
+            case "c":
+                result_prom = c();
+                break;
+        }
+
+        result_prom.then((result)=>{
+            console.log(`The end was ${result}`);
+        });
+
+    });
+}
+
+
+// a().then((result_a)=>{
+//     console.log(result_a);
+
+//     let result_b = b();
+
+//     result_b.then((acutal_result_b)=>{
+//         console.log(acutal_result_b);
+//     });
+
+//     console.log("end2");
+// });
+
+// console.log("end1");
+
+//ex. Running at the same time
+c();
+b();
+
+// ex. Running c first then  b.
+c().then(()=>{
+    b();
+});
+
+</script>
+
+</html>
