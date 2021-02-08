@@ -15,7 +15,7 @@ class Database {
       })
       .then(answer => {
         
-        return answer;
+        return answer.addNewDepartment;
        })
         
     }
