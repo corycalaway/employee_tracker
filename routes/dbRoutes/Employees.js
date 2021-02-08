@@ -1,7 +1,8 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 const Aplication = require('../../server')
-
+const mysql = require('mysql2');
+const connection = require('../../server')
 
 class Database {
     constructor() { }
@@ -11,7 +12,7 @@ class Database {
        return inquirer.prompt({
         type: "input",
         name: "addNewDepartment",
-        message: "Enter new department name?"
+        message: "Enter new department name."
       })
       .then(answer => {
         
@@ -21,9 +22,33 @@ class Database {
     }
 
     // function to add a role to db
-    addRole() {
-
-    }
+    addRole(departmentArray) {
+        console.log(departmentArray)
+        return inquirer.prompt({
+         type: "input",
+         name: "roleName",
+         message: "Enter new role name."
+       }, 
+       {
+           type: "number",
+           name: "salary",
+           message: "Enter salary amount for role."
+           
+       },
+       {
+           type: "list",
+           name: "department",
+           message: "Select a department for role",
+           choices: departmentArray
+       } 
+       
+       )
+       .then(answer => {
+         
+         return answer.addNewDepartment;
+        })
+         
+     }
 
     // function to add employee to db
     addEmployee() {

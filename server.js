@@ -32,6 +32,9 @@ class Aplication {
   constructor() {
     this.search
     this.addInfo
+    this.task
+    this.department
+    this.departments
   }
 
   //   startApp() {
@@ -73,7 +76,7 @@ class Aplication {
   
 
   // choiceSwitch() {
-
+ 
 
     switch (answer.DBOptions) {
       case "View all departments":
@@ -102,6 +105,7 @@ class Aplication {
         return this.afterConnection();
 
       case "Add a department":
+        this.task = 'department'
        return this.addInfo = new Database().addDepartment() 
         .then((answer) => {
         return this.afterConnectionAdd(answer);
@@ -125,8 +129,21 @@ class Aplication {
       // return this.afterConnectionAdd()
       //  console.log(this.addInfo);
       case "Add a role":
-        console.log(answer.DBOptions)
-        return connection.end();
+        this.task = 'role'
+        const departments = [];
+        // let departments;
+       this.departments = connection.query(`SELECT department_name FROM department;`, function (err, res) {
+          if (err) throw err;
+       console.log(res)
+          // departments.push(res.sql)
+        })
+        // console.log(departments)
+
+       return this.addInfo = new Database().addRole(this.departments) 
+
+        .then((answer) => {
+        return this.afterConnectionAdd(answer);
+        })
 
       case "Add employee":
         console.log(answer.DBOptions)
@@ -201,23 +218,47 @@ class Aplication {
     // }
 
     afterConnectionAdd(answer) {
-console.log('you made it')
+    console.log('you made it')
       // this.addInfo = new Database().addDepartment()
       // connection.end();
       console.log(answer)
+
+      if (this.task === 'department') {
+
       connection.query(`INSERT INTO department SET ?`,
         {
           department_name: answer
         },
         function (err, res) {
           if (err) throw err;
-          
-          // console.log(res.affectedRows + ' product inserted!\n');
-          // // Call updateProduct() AFTER the INSERT completes
-          // updateProduct();
         }
 
       )
+
+      } else if (this.task === 'roles') {
+
+        connection.query(`INSERT INTO department SET ?`,
+          {
+            department_name: answer
+          },
+          function (err, res) {
+            if (err) throw err;
+          }
+  
+        )
+
+        }  else if (this.task === 'employee') {
+
+          connection.query(`INSERT INTO department SET ?`,
+            {
+              department_name: answer
+            },
+            function (err, res) {
+              if (err) throw err;
+            }
+    
+          )
+          }
 
       this.dbQuestions();
     }
