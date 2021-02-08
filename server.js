@@ -211,13 +211,15 @@ console.log('you made it')
         },
         function (err, res) {
           if (err) throw err;
-          console.log(res)
+          
           // console.log(res.affectedRows + ' product inserted!\n');
           // // Call updateProduct() AFTER the INSERT completes
           // updateProduct();
         }
 
       )
+
+      this.dbQuestions();
     }
   }
 
