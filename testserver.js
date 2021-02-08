@@ -3,6 +3,9 @@ const cTable = require('console.table');
 const inquirer = require('inquirer');
 const Database = require('./routes/dbRoutes/Employees')
 const logo = require('asciiart-logo');
+
+const search = "";
+const addInfo = "";
 // const config = require('./package.json');
 // Creates the connection to database
 const connection = mysql.createConnection({
@@ -28,11 +31,11 @@ const connection = mysql.createConnection({
 
 // view different sections
 
-class Aplication {
-  constructor() {
-    this.search
-    this.addInfo
-  }
+// class Aplication {
+//   constructor() {
+//     this.search
+//     this.addInfo
+//   }
 
   //   startApp() {
   //     console.log(logo({name: 'Employee Tracker',
@@ -52,27 +55,27 @@ class Aplication {
 
   //     }
 
-  startApp() {
+  startApp = function () {
     console.log(logo({
       name: 'Employee Tracker',
       font: 'Speed'
     }).render());
-    this.dbQuestions();
+   return
     // connection.end();
   }
 
-  dbQuestions() {
+  dbQuestions = function() {
     return inquirer
       .prompt({
         type: "list",
         name: "DBOptions",
         message: "What would you like to do?",
         choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add employee", "Update Employee", "EXIT"],
-      }).then(answer => {
+      })
 
-  
+  }
 
-  // choiceSwitch() {
+  choiceSwitch = function() {
 
 
     switch (answer.DBOptions) {
@@ -80,29 +83,29 @@ class Aplication {
         console.log(answer.DBOptions)
         // afterConnection();
         // return connection.end();
-        this.search = new Database().viewDepartments();
-        console.log(this.search)
-        return this.afterConnection();
+        search = new Database().viewDepartments();
+        console.log(search)
+        return afterConnection();
 
       case "View all roles":
         console.log(answer.DBOptions)
         // afterConnection();
         // return connection.end();
-        this.search = new Database().viewRoles();
-        console.log(this.search)
-        return this.afterConnection();
+        search = new Database().viewRoles();
+        console.log(search)
+        return afterConnection();
 
       case "View all employees":
         console.log(answer.DBOptions)
         // afterConnection();
         // return connection.end();
-        this.search = new Database().viewEmployees();
-        console.log(this.search)
-        return this.afterConnection();
+        tsearch = new Database().viewEmployees();
+        console.log(search)
+        return afterConnection();
 
       case "Add a department":
-        this.addInfo = new Database().addDepartment()
-        return connection.end();
+
+        return 'department'
 
       // console.log(answer.DBOptions)
       // inquirer.prompt({
@@ -114,7 +117,7 @@ class Aplication {
       //   this.search = answer;
       //   return this.afterConnectionAdd()
       // })
-      
+      // this.addInfo = new Database().addDepartment()
       // .then(result => {
       // return this.afterConnectionAdd()
       // })
@@ -160,14 +163,11 @@ class Aplication {
       //     // this.afterConnectionAdd();
       //     console.log('here')
       // })
-    }})
-
-
-
+    }
   }
-    afterConnection() {
+    afterConnection = function() {
       console.log('yay')
-      connection.query(this.search, function (err, res) {
+      connection.query(addInfo, function (err, res) {
         if (err) throw err;
         console.log(res);
         console.table(res)
@@ -198,13 +198,13 @@ class Aplication {
     // }
     // }
 
-    afterConnectionAdd() {
+    afterConnectionAdd = function() {
 
       // this.addInfo = new Database().addDepartment()
 
       connection.query(`INSERT INTO department SET ?`,
         {
-          department_name: this.addInfo
+          department_name: addInfo
         },
         function (err, res) {
           if (err) throw err;
@@ -216,7 +216,7 @@ class Aplication {
 
       )
     }
-  }
+  
 
 // sample join
 // afterConnection = (search) => {
@@ -238,19 +238,22 @@ class Aplication {
 //   new Aplication().startApp();
 
 // });
-// let runSequence = function () {
-//   let runningApp = new Aplication()
-//   runningApp.startApp()
-//     // .then(answer => {
-//     //   runningApp.choiceSwitch();
-//     //   console.log(answer + 'here')
-//     // })
-// }
+let runSequence = function () {
+  startApp()
+  dbQuestions()
+  .then(answer => {
+    console.log(answer)
+  })
+    // .then(answer => {
+    //   runningApp.choiceSwitch();
+    //   console.log(answer + 'here')
+    // })
+}
 connection.connect(err => {
   if (err) throw err;
   console.log('connected as id ' + connection.threadId);
-  new Aplication().startApp()
-  // runSequence();
+  // new Aplication().startApp()
+  runSequence();
 
 });
-module.exports = Aplication;
+// module.exports = Aplication;
