@@ -73,158 +73,159 @@ class Aplication {
         choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add employee", "Update Employee", "EXIT"],
       }).then(answer => {
 
-  
 
-  // choiceSwitch() {
- 
 
-    switch (answer.DBOptions) {
-      case "View all departments":
-        console.log(answer.DBOptions)
-        // afterConnection();
-        // return connection.end();
-        this.search = new Database().viewDepartments();
-        console.log(this.search)
-        return this.afterConnection();
+        // choiceSwitch() {
 
-      case "View all roles":
-        console.log(answer.DBOptions)
-        
-        // afterConnection();
-        // return connection.end();
-        this.search = new Database().viewRoles();
-        console.log(this.search)
-        return this.afterConnection();
 
-      case "View all employees":
-        console.log(answer.DBOptions)
-        // afterConnection();
-        // return connection.end();
-        this.search = new Database().viewEmployees();
-        console.log(this.search)
-        return this.afterConnection();
+        switch (answer.DBOptions) {
+          case "View all departments":
+            console.log(answer.DBOptions)
+            // afterConnection();
+            // return connection.end();
+            this.search = new Database().viewDepartments();
+            console.log(this.search)
+            return this.afterConnection();
 
-      case "Add a department":
-        this.task = 'department'
-       return this.addInfo = new Database().addDepartment() 
-        .then((answer) => {
-        return this.afterConnectionAdd(answer);
-        })
-      // console.log(answer.DBOptions)
-      // inquirer.prompt({
-      //   type: "input",
-      //   name: "addNewDepartment",
-      //   message: "Enter new department name?"
-      // })
-      // .then(answer => {
-      //   this.search = answer;
-      //   return this.afterConnectionAdd()
-      // })
-      
-      // .then(result => {
-      // return this.afterConnectionAdd()
-      // })
-      // return this.afterConnectionAdd();
-      // return console.log(this.addInfo)
-      // return this.afterConnectionAdd()
-      //  console.log(this.addInfo);
-      case "Add a role":
-        this.task = 'roles'
-        const departments = [];
-        // let departments;
-      //  this.departments = connection.query(`SELECT department_name FROM department;`, function (err, res) {
-      //     if (err) throw err;
-      //  console.log(res)
-      //     // departments.push(res.sql)
-      //   })
-        // console.log(departments)
+          case "View all roles":
+            console.log(answer.DBOptions)
 
-       return this.addInfo = new Database().addRole(this.departments) 
+            // afterConnection();
+            // return connection.end();
+            this.search = new Database().viewRoles();
+            console.log(this.search)
+            return this.afterConnection();
 
-        .then((answer) => {
-          console.log(answer)
-        return this.afterConnectionAdd(answer);
-        })
+          case "View all employees":
+            console.log(answer.DBOptions)
+            // afterConnection();
+            // return connection.end();
+            this.search = new Database().viewEmployees();
+            console.log(this.search)
+            return this.afterConnection();
 
-      case "Add employee":
-        console.log(answer.DBOptions)
-        return connection.end();
+          case "Add a department":
+            this.task = 'department'
+            return this.addInfo = new Database().addDepartment()
+              .then((answer) => {
+                return this.afterConnectionAdd(answer);
+              })
+          // console.log(answer.DBOptions)
+          // inquirer.prompt({
+          //   type: "input",
+          //   name: "addNewDepartment",
+          //   message: "Enter new department name?"
+          // })
+          // .then(answer => {
+          //   this.search = answer;
+          //   return this.afterConnectionAdd()
+          // })
 
-      case "Update Employee":
-        console.log(answer.DBOptions)
-        return connection.end();
+          // .then(result => {
+          // return this.afterConnectionAdd()
+          // })
+          // return this.afterConnectionAdd();
+          // return console.log(this.addInfo)
+          // return this.afterConnectionAdd()
+          //  console.log(this.addInfo);
+          case "Add a role":
+            this.task = 'roles'
+            const departments = [];
+            // let departments;
+            //  this.departments = connection.query(`SELECT department_name FROM department;`, function (err, res) {
+            //     if (err) throw err;
+            //  console.log(res)
+            //     // departments.push(res.sql)
+            //   })
+            // console.log(departments)
 
-      case "EXIT":
-        console.log(answer.DBOptions)
-        return connection.end();
+            return this.addInfo = new Database().addRole(this.departments)
 
-        // if (answer.DBOptions === "Engineer") {
-        //   this.roleAssign = "Engineer";
-        //   this.caller = new Engineer();
+              .then((answer) => {
+                console.log(answer)
+                return this.afterConnectionAdd(answer);
+              })
 
-        //   return this.startApp();
-        // } else if (answer.DBOptions === "Intern") {
-        //   this.roleAssign = "Intern";
-        //   this.caller = new Intern();
-        //   return this.startApp();
-        // } else {
-        //   connection.end();
-        // }
-      
-      // .then(() => {
-      //   // console.log(this.addInfo)
-      //   this.addInfo = new Database().addDepartment();
-      //   return this.afterConnectionAdd()
-      // })
-      // .then(() => {
-      //     // this.afterConnectionAdd();
-      //     console.log('here')
-      // })
-    }})
+          case "Add employee":
+            console.log(answer.DBOptions)
+            return connection.end();
+
+          case "Update Employee":
+            console.log(answer.DBOptions)
+            return connection.end();
+
+          case "EXIT":
+            console.log(answer.DBOptions)
+            return connection.end();
+
+          // if (answer.DBOptions === "Engineer") {
+          //   this.roleAssign = "Engineer";
+          //   this.caller = new Engineer();
+
+          //   return this.startApp();
+          // } else if (answer.DBOptions === "Intern") {
+          //   this.roleAssign = "Intern";
+          //   this.caller = new Intern();
+          //   return this.startApp();
+          // } else {
+          //   connection.end();
+          // }
+
+          // .then(() => {
+          //   // console.log(this.addInfo)
+          //   this.addInfo = new Database().addDepartment();
+          //   return this.afterConnectionAdd()
+          // })
+          // .then(() => {
+          //     // this.afterConnectionAdd();
+          //     console.log('here')
+          // })
+        }
+      })
 
 
 
   }
-    afterConnection() {
-      console.log('yay')
-      connection.query(this.search, function (err, res) {
-        if (err) throw err;
-        console.log(res);
-        console.table(res)
-        new Aplication().dbQuestions();
-      });
-    }
+  afterConnection() {
+    console.log('yay')
+    connection.query(this.search, function (err, res) {
+      if (err) throw err;
+      console.log(res);
+      console.table(res)
+      new Aplication().dbQuestions();
+    });
+  }
 
-    // afterConnectionAdd() {
+  // afterConnectionAdd() {
 
 
-    //    let addDataInfo;
+  //    let addDataInfo;
 
-    //    addDataInfo.then( this.addInfo = new Database().addDepartment())
+  //    addDataInfo.then( this.addInfo = new Database().addDepartment())
 
-    //   connection.query(`INSERT INTO department SET ?`,
-    // {
-    //   department_name: this.addInfo
-    // },
-    // function(err, res) {
-    //   if (err) throw err;
-    //   console.log(res)
-    //   // console.log(res.affectedRows + ' product inserted!\n');
-    //   // // Call updateProduct() AFTER the INSERT completes
-    //   // updateProduct();
-    // }
+  //   connection.query(`INSERT INTO department SET ?`,
+  // {
+  //   department_name: this.addInfo
+  // },
+  // function(err, res) {
+  //   if (err) throw err;
+  //   console.log(res)
+  //   // console.log(res.affectedRows + ' product inserted!\n');
+  //   // // Call updateProduct() AFTER the INSERT completes
+  //   // updateProduct();
+  // }
 
-    //   )
-    // }
-    // }
+  //   )
+  // }
+  // }
 
-    afterConnectionAdd(answer) {
+  afterConnectionAdd(answer) {
     console.log('you made it')
-      // this.addInfo = new Database().addDepartment()
-      // connection.end();
-      console.log(answer)
+    // this.addInfo = new Database().addDepartment()
+    // connection.end();
+    console.log(answer)
 
-      if (this.task === 'department') {
+    if (this.task === 'department') {
 
       connection.query(`INSERT INTO department SET ?`,
         {
@@ -236,44 +237,44 @@ class Aplication {
 
       )
 
-      } else if (this.task === 'roles') {
-        // let roleInfo = JSON.stringify(answer)
-        // console.log(roleInfo)
-        // const [roleName, salary, department] = roleInfo;
-        const [roleName, salary, department] = answer;
-        
-        console.log(roleName.roleName)
-        console.log(salary.salary)
-        console.log(department.department)
-        connection.query(`INSERT INTO roles SET ?`,
-          {
-            title: roleName.roleName
-            // salary: salary.salary
-            // department_name: answer.department
-          },
-          function (err, res) {
-            if (err) throw err;
-            
-          }
-  
-        )
+    } else if (this.task === 'roles') {
+      // let roleInfo = JSON.stringify(answer)
+      // console.log(roleInfo)
+      // const [roleName, salary, department] = roleInfo;
+      const [roleName, salary, department] = answer;
 
-        }  else if (this.task === 'employee') {
+      console.log(roleName.roleName)
+      console.log(salary.salary)
+      console.log(department.department)
+      connection.query(`INSERT INTO roles SET ?`,
+        {
+          title: roleName.roleName,
+          salary: salary.salary
+          // department_name: answer.department
+        },
+        function (err, res) {
+          if (err) throw err;
 
-          connection.query(`INSERT INTO department SET ?`,
-            {
-              department_name: answer
-            },
-            function (err, res) {
-              if (err) throw err;
-            }
-    
-          )
-          }
+        }
 
-      this.dbQuestions();
+      )
+
+    } else if (this.task === 'employee') {
+
+      connection.query(`INSERT INTO department SET ?`,
+        {
+          department_name: answer
+        },
+        function (err, res) {
+          if (err) throw err;
+        }
+
+      )
     }
+
+    this.dbQuestions();
   }
+}
 
 // sample join
 // afterConnection = (search) => {
