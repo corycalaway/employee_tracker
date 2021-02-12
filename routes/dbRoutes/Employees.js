@@ -7,6 +7,7 @@ const connection = require('../../server')
 class Database {
     constructor() {
         this.dataSaved = [];
+        this.department = [];
     }
 
     // function to add a department db
@@ -24,8 +25,12 @@ class Database {
     }
 
     // function to add a role to db
-    addRole(departmentArray) {
-        console.log(departmentArray)
+    addRole(array) {
+        // this.department = connection.query(`SELECT department_name FROM department;`, function (err, res) {
+        //        if (err) throw err;
+        //        return res.json()
+        //     })
+         console.log(array)
         return inquirer.prompt({
             type: "input",
             name: "roleName",

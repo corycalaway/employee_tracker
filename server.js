@@ -34,7 +34,7 @@ class Aplication {
     this.addInfo
     this.task
     this.department
-    this.departments
+    this.departments = [];
   }
 
   //   startApp() {
@@ -130,17 +130,24 @@ class Aplication {
           //  console.log(this.addInfo);
           case "Add a role":
             this.task = 'roles'
-            const departments = [];
+            // let departments = [];
+
+            this.getAllRoles()
             // let departments;
-            //  this.departments = connection.query(`SELECT department_name FROM department;`, function (err, res) {
-            //     if (err) throw err;
-            //  console.log(res)
-            //     // departments.push(res.sql)
+              // this.departments = connection.query(`SELECT department_name FROM department;`, function (err, res) {
+              //    if (err) throw err;
+              //    return res.json()
+              // })
+              return this.addInfo = new Database().addRole(this.departments)
+            //   .then((answer) => {
+              
+            // //     // departments.push(res.sql)
             //   })
-            // console.log(departments)
+            
+            // //  console.log(this.departments)
 
-            return this.addInfo = new Database().addRole(this.departments)
-
+            //  return this.addInfo = new Database().addRole(this.departments)
+              //})
               .then((answer) => {
                 console.log(answer)
                 return this.afterConnectionAdd(answer);
@@ -183,9 +190,16 @@ class Aplication {
         }
       })
 
-
+ 
 
   }
+
+  getAllRoles() {
+    return this.departments = connection.query(`SELECT department_name FROM department;`, function (err, res) {
+                  if (err) throw err;
+                  
+  })}
+
   afterConnection() {
     console.log('yay')
     connection.query(this.search, function (err, res) {
@@ -311,4 +325,5 @@ connection.connect(err => {
   // runSequence();
 
 });
+
 module.exports = Aplication;
