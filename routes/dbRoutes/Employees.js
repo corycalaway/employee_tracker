@@ -30,7 +30,7 @@ class Database {
         //        if (err) throw err;
         //        return res.json()
         //     })
-         console.log(array)
+    //    console.log(array)
         return inquirer.prompt({
             type: "input",
             name: "roleName",
@@ -54,11 +54,12 @@ class Database {
                     type: "list",
                     name: "department",
                     message: "Select a department for role",
-                    choices: ['Sales', 'Legal']
+                    choices: ['Sales', 'Legal', 'Finance', 'Engineering']
                 })
                 //  return answer.addNewDepartment;
             })
             .then((answer) => {
+
                 this.dataSaved.push(answer)
                 return this.dataSaved;
             })
@@ -67,6 +68,39 @@ class Database {
     // function to add employee to db
     addEmployee() {
 
+        return inquirer.prompt({
+            type: "input",
+            name: "firstName",
+            message: "Enter new Employees first name."
+        }
+
+        )
+            .then((answer) => {
+                this.dataSaved.push(answer)
+                return inquirer.prompt({
+                    type: "number",
+                    name: "lastName",
+                    message: "Enter new Employees last name."
+                })
+                //  return answer.addNewDepartment;
+            })
+
+            .then((answer) => {
+                this.dataSaved.push(answer)
+                return inquirer.prompt({
+                    type: "list",
+                    name: "department",
+                    message: "Select a department for role",
+                    choices: ['Sales', 'Legal', 'Finance', 'Engineering']
+                })
+                //  return answer.addNewDepartment;
+            })
+            .then((answer) => {
+
+                this.dataSaved.push(answer)
+                return this.dataSaved;
+            })
+    
     }
 
     // function to update employee in db

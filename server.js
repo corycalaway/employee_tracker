@@ -55,6 +55,16 @@ class Aplication {
 
   //     }
 
+  updateInfo() {
+    
+    this.departments = connection.promise().query(`SELECT department_name FROM department;`)
+    .then(answer => {
+      return console.log(answer)
+    }).then(() =>
+    this.dbQuestions())
+
+  }
+
   startApp() {
     console.log(logo({
       name: 'Employee Tracker',
@@ -132,17 +142,21 @@ class Aplication {
             this.task = 'roles'
             // let departments = [];
 
-            this.getAllRoles()
+            // this.getAllRoles().then(res => {
+
+            //   console.log(res)
+            //   // res.map()
+            // })
             // let departments;
               // this.departments = connection.query(`SELECT department_name FROM department;`, function (err, res) {
               //    if (err) throw err;
               //    return res.json()
               // })
-              return this.addInfo = new Database().addRole(this.departments)
-            //   .then((answer) => {
               
+              //  .then(() => {
+              return this.addInfo = new Database().addRole(this.departments)
             // //     // departments.push(res.sql)
-            //   })
+            //  })
             
             // //  console.log(this.departments)
 
@@ -195,10 +209,7 @@ class Aplication {
   }
 
   getAllRoles() {
-    return this.departments = connection.query(`SELECT department_name FROM department;`, function (err, res) {
-                  if (err) throw err;
-                  
-  })}
+    return this.departments = connection.promise().query(`SELECT department_name FROM department;`)}
 
   afterConnection() {
     console.log('yay')
@@ -286,7 +297,8 @@ class Aplication {
       )
     }
 
-    this.dbQuestions();
+    // this.dbQuestions();
+    this.updateInfo();
   }
 }
 
