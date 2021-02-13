@@ -59,10 +59,16 @@ class Aplication {
     
     this.departments = connection.promise().query(`SELECT department_name FROM department;`)
     .then(answer => {
-      return console.log(answer)
-    }).then(() =>
-    this.dbQuestions())
+      let tempHold, rest;
+      //
+      [tempHold, rest] = answer
 
+      // console.log(tempHold.map(tr => tr.department_name))
+       this.departments = tempHold.map(tr => tr.department_name)
+      // return console.log(JSON.stringify(tempHold))
+    }).then(() =>
+    // this.dbQuestions())
+    console.log(this.departments))
   }
 
   startApp() {
@@ -339,3 +345,4 @@ connection.connect(err => {
 });
 
 module.exports = Aplication;
+
