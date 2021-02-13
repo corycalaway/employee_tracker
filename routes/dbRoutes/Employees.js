@@ -52,7 +52,7 @@ class Database {
                 this.dataSaved.push(answer)
                 return inquirer.prompt({
                     type: "list",
-                    name: "department",
+                    name: "department_id",
                     message: "Select a department for role",
                     choices: array
                 })

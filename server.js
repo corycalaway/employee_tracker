@@ -35,6 +35,7 @@ class Aplication {
     this.task
     this.department
     this.departments = [];
+    this.currentDept
   }
 
   //   startApp() {
@@ -275,22 +276,45 @@ class Aplication {
       // console.log(roleInfo)
       // const [roleName, salary, department] = roleInfo;
       const [roleName, salary, department] = answer;
+      console.log('-----------------------------------')
+      // console.log(roleName.roleName)
+      // console.log(salary.salary)
+      this.currentDept = department.department_id
+      console.log(this.currentDept)
+      // console.log(answer + 'here')
+      // console.log(JSON.stringify(answer))
+      // console.log(this.departments)
+      connection.promise().query(`SELECT * FROM department;`)
+      .then(answer => {
+        console.log('+++++++++++++++')
+      console.log(this.currentDept)
+      // console.log(deptId)
+      let tempHold, rest;
+      let deptId; 
+      [tempHold, rest] = answer
+      deptId = tempHold.indexOf(this.currentDept).id;
 
-      console.log(roleName.roleName)
-      console.log(salary.salary)
-      console.log(department.department)
+      
+      // let deptId = tempHold.map(tr => tr.department_name)
+      console.log('=================id==================')
+      console.log(tempHold)
+      console.log(deptId)
+      // let deptId = this.departments[]
       connection.query(`INSERT INTO roles SET ?`,
+      
         {
           title: roleName.roleName,
-          salary: salary.salary
-          // department_name: answer.department
+          salary: salary.salary,
+          department_id: 1
+          // department_id: 
         },
         function (err, res) {
           if (err) throw err;
 
         }
 
-      )
+
+      )})
 
     } else if (this.task === 'employee') {
 
