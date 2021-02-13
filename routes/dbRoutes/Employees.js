@@ -30,7 +30,7 @@ class Database {
         //        if (err) throw err;
         //        return res.json()
         //     })
-    //    console.log(array)
+        console.log(array)
         return inquirer.prompt({
             type: "input",
             name: "roleName",
@@ -54,7 +54,7 @@ class Database {
                     type: "list",
                     name: "department",
                     message: "Select a department for role",
-                    choices: ['Sales', 'Legal', 'Finance', 'Engineering']
+                    choices: array
                 })
                 //  return answer.addNewDepartment;
             })

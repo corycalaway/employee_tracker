@@ -67,8 +67,10 @@ class Aplication {
        this.departments = tempHold.map(tr => tr.department_name)
       // return console.log(JSON.stringify(tempHold))
     }).then(() =>
-    // this.dbQuestions())
-    console.log(this.departments))
+    // console.log(this.departments))
+    
+    this.dbQuestions())
+    // console.log(this.departments))
   }
 
   startApp() {
@@ -76,7 +78,7 @@ class Aplication {
       name: 'Employee Tracker',
       font: 'Speed'
     }).render());
-    this.dbQuestions();
+    this.updateInfo();
     // connection.end();
   }
 
@@ -150,7 +152,7 @@ class Aplication {
 
             // this.getAllRoles().then(res => {
 
-            //   console.log(res)
+              console.log(this.departments)
             //   // res.map()
             // })
             // let departments;
@@ -223,7 +225,7 @@ class Aplication {
       if (err) throw err;
       console.log(res);
       console.table(res)
-      new Aplication().dbQuestions();
+      new Aplication().updateInfo();
     });
   }
 
