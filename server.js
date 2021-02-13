@@ -294,7 +294,7 @@ class Aplication {
 
     } else if (this.task === 'employee') {
 
-      connection.query(`INSERT INTO department SET ?`,
+      connection.query(`INSERT INTO employee SET ?`,
         {
           department_name: answer
         },
