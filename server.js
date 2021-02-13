@@ -284,7 +284,7 @@ class Aplication {
       // console.log(answer + 'here')
       // console.log(JSON.stringify(answer))
       // console.log(this.departments)
-      connection.promise().query(`SELECT * FROM department;`)
+      connection.promise().query(`SELECT * FROM roles;`)
       .then(answer => {
         console.log('+++++++++++++++')
       console.log(this.currentDept)
@@ -292,12 +292,13 @@ class Aplication {
       let tempHold, rest;
       let deptId; 
       [tempHold, rest] = answer
-      deptId = tempHold.indexOf(this.currentDept).id;
+      deptId = tempHold.indexOf(this.currentDept);
 
       
       // let deptId = tempHold.map(tr => tr.department_name)
       console.log('=================id==================')
-      console.log(tempHold)
+      console.log(tempHold[1])
+
       console.log(deptId)
       // let deptId = this.departments[]
       connection.query(`INSERT INTO roles SET ?`,
