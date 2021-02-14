@@ -57,20 +57,20 @@ class Aplication {
   //     }
 
   updateInfo() {
-    
-    this.departments = connection.promise().query(`SELECT department_name FROM department;`)
-    .then(answer => {
-      let tempHold, rest;
-      //
-      [tempHold, rest] = answer
 
-      // console.log(tempHold.map(tr => tr.department_name))
-       this.departments = tempHold.map(tr => tr.department_name)
-      // return console.log(JSON.stringify(tempHold))
-    }).then(() =>
-    // console.log(this.departments))
-    
-    this.dbQuestions())
+    this.departments = connection.promise().query(`SELECT department_name FROM department;`)
+      .then(answer => {
+        let tempHold, rest;
+        //
+        [tempHold, rest] = answer
+
+        // console.log(tempHold.map(tr => tr.department_name))
+        this.departments = tempHold.map(tr => tr.department_name)
+        // return console.log(JSON.stringify(tempHold))
+      }).then(() =>
+        // console.log(this.departments))
+
+        this.dbQuestions())
     // console.log(this.departments))
   }
 
@@ -153,23 +153,23 @@ class Aplication {
 
             // this.getAllRoles().then(res => {
 
-              console.log(this.departments)
+            console.log(this.departments)
             //   // res.map()
             // })
             // let departments;
-              // this.departments = connection.query(`SELECT department_name FROM department;`, function (err, res) {
-              //    if (err) throw err;
-              //    return res.json()
-              // })
-              
-              //  .then(() => {
-              return this.addInfo = new Database().addRole(this.departments)
-            // //     // departments.push(res.sql)
-            //  })
-            
-            // //  console.log(this.departments)
+            // this.departments = connection.query(`SELECT department_name FROM department;`, function (err, res) {
+            //    if (err) throw err;
+            //    return res.json()
+            // })
 
-            //  return this.addInfo = new Database().addRole(this.departments)
+            //  .then(() => {
+            return this.addInfo = new Database().addRole(this.departments)
+              // //     // departments.push(res.sql)
+              //  })
+
+              // //  console.log(this.departments)
+
+              //  return this.addInfo = new Database().addRole(this.departments)
               //})
               .then((answer) => {
                 console.log(answer)
@@ -213,12 +213,13 @@ class Aplication {
         }
       })
 
- 
+
 
   }
 
   getAllRoles() {
-    return this.departments = connection.promise().query(`SELECT department_name FROM department;`)}
+    return this.departments = connection.promise().query(`SELECT department_name FROM department;`)
+  }
 
   afterConnection() {
     console.log('yay')
@@ -284,38 +285,53 @@ class Aplication {
       // console.log(answer + 'here')
       // console.log(JSON.stringify(answer))
       // console.log(this.departments)
-      connection.promise().query(`SELECT * FROM roles;`)
-      .then(answer => {
-        console.log('+++++++++++++++')
-      console.log(this.currentDept)
-      // console.log(deptId)
-      let tempHold, rest;
-      let deptId; 
-      [tempHold, rest] = answer
-      deptId = tempHold.indexOf(this.currentDept);
-
-      
-      // let deptId = tempHold.map(tr => tr.department_name)
-      console.log('=================id==================')
-      console.log(tempHold[1])
-
-      console.log(deptId)
-      // let deptId = this.departments[]
-      connection.query(`INSERT INTO roles SET ?`,
-      
-        {
-          title: roleName.roleName,
-          salary: salary.salary,
-          department_id: 1
-          // department_id: 
-        },
-        function (err, res) {
-          if (err) throw err;
-
-        }
+      connection.promise().query(`SELECT * FROM department;`)
+        .then(answer => {
+          console.log('+++++++++++++++')
+          console.log(this.currentDept)
+          // console.log(deptId)
+          let tempHold, rest;
+          let deptId;
+          [tempHold, rest] = answer
+          deptId = tempHold.indexOf(this.currentDept);
 
 
-      )})
+          // let deptId = tempHold.map(tr => tr.department_name)
+          console.log('=================id==================')
+          console.log(tempHold[1].department_name + tempHold[1].id )
+          console.log(tempHold)
+          
+          tempHold.forEach(answer => {
+            console.log(answer.department_name)
+            console.log(this.currentDept)
+            if(answer.department_name === this.currentDept) {
+              console.log('pass')
+            } else {
+              console.log('fail')
+            }
+          })
+
+          // let filterVal = tempHold.filter(temHold)
+
+          
+          console.log(deptId)
+          // let deptId = this.departments[]
+          connection.query(`INSERT INTO roles SET ?`,
+
+            {
+              title: roleName.roleName,
+              salary: salary.salary,
+              department_id: 1
+              // department_id: 
+            },
+            function (err, res) {
+              if (err) throw err;
+
+            }
+
+
+          )
+        })
 
     } else if (this.task === 'employee') {
 
