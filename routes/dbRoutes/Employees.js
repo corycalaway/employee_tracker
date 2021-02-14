@@ -116,11 +116,17 @@ class Database {
     // view all roles function
     viewRoles() {
 
-        return `SELECT employee.role_id, roles.title, roles.salary, department.department_name
-        FROM employee
-        RIGHT JOIN roles ON employee.role_id = roles.id
+        // remove employee and change employee role id to rolesid
+        // return `SELECT employee.role_id, roles.title, roles.salary, department.department_name
+        // FROM employee
+        // RIGHT JOIN roles ON employee.role_id = roles.id
+        // LEFT JOIN department ON roles.department_id = department.id
+        // ORDER BY roles.title ASC;`
+        return `SELECT roles.id, roles.title, roles.salary, department.department_name
+        FROM roles
         LEFT JOIN department ON roles.department_id = department.id
         ORDER BY roles.title ASC;`
+
 
     }
     // view all emplohees function
