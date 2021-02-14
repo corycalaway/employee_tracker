@@ -36,6 +36,7 @@ class Aplication {
     this.department
     this.departments = [];
     this.currentDept
+    this.idDepartment
   }
 
   //   startApp() {
@@ -305,23 +306,29 @@ class Aplication {
             console.log(answer.department_name)
             console.log(this.currentDept)
             if(answer.department_name === this.currentDept) {
+              let i;
+              i++
+              console.log(answer.id)
               console.log('pass')
+              return this.idDepartment = answer.id
+              // console.log("righthereeeeeeeee")
+              // console.log(this.idDepartment)
             } else {
-              console.log('fail')
+              return console.log('fail')
             }
           })
 
           // let filterVal = tempHold.filter(temHold)
 
           
-          console.log(deptId)
+          // console.log(deptId)
           // let deptId = this.departments[]
           connection.query(`INSERT INTO roles SET ?`,
-
+          
             {
               title: roleName.roleName,
               salary: salary.salary,
-              department_id: 1
+              department_id: this.idDepartment
               // department_id: 
             },
             function (err, res) {
