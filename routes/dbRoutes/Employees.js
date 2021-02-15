@@ -9,6 +9,7 @@ class Database {
         this.dataSaved = [];
         this.department = [];
         this.dataSavedEmployee = [];
+        this.dataUpdateEmployee = [];
     }
 
     // function to add a department db
@@ -105,13 +106,28 @@ class Database {
     }
 
     // function to update employee in db
-    updateEmployee(array) {
+    updateEmployee(arrayEmp, arrayDep) {
         console.log('check')
         return inquirer.prompt({
             type: "list",
+                    name: "employee",
+                    message: "Select employee to update role",
+                    choices: arrayEmp
+        })
+        .then((answer) => {
+            this.dataUpdateEmployee.push(answer)
+            return inquirer.prompt({
+                type: "list",
                     name: "department",
                     message: "Select new role for employee",
-                    choices: array
+                    choices: arrayDep
+            })
+            //  return answer.addNewDepartment;
+        })
+        .then((answer) => {
+
+            this.dataUpdateEmployee.push(answer)
+            return this.dataUpdateEmployee;
         })
     }
 

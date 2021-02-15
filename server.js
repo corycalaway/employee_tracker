@@ -39,6 +39,7 @@ class Aplication {
     this.currentDept
     this.idDepartment
     this.infoUpdate
+    this.allEmployees = [];
     
   }
 
@@ -85,11 +86,26 @@ class Aplication {
         return this.roles = tempHold.map(tr => tr.title)
         // return console.log(JSON.stringify(tempHold))
       })
+      .then(() => {
+
+        return this.allEmployees = connection.promise().query(`SELECT first_name, last_name FROM employee;`)
+      })
+      .then(answer => {
+        let tempHold, rest;
+        //
+        [tempHold, rest] = answer
+
+        console.log(tempHold)
+       
+        // console.log(tempHold.map(tr => tr.department_name))
+         return this.allEmployees = tempHold.map(tr => tr.first_name + ' ' + tr.last_name)
+        // return console.log(JSON.stringify(tempHold))
+      })
       
       .then(() =>
-        // console.log(this.departments))
+        // console.log(this.allEmployees))
 
-        this.dbQuestions())
+      this.dbQuestions())
     // console.log(this.departments))
   }
   // updateInfo() {
@@ -244,7 +260,12 @@ class Aplication {
           case "Update Employee Role":
 
             this.task = 'updateEmployee'
-            return this.infoUpdate = new Database().updateEmployee(this.roles)
+            return this.infoUpdate = new Database().updateEmployee(this.allEmployees, this.roles)
+
+            .then((answer) => {
+              console.log(answer)
+              return this.updateConnection(answer);
+            })
 
           case "EXIT":
             console.log(answer.DBOptions)
@@ -283,6 +304,7 @@ class Aplication {
     return this.departments = connection.promise().query(`SELECT department_name FROM department;`)
   }
 
+
   afterConnection() {
     console.log('yay')
     connection.query(this.search, function (err, res) {
@@ -315,6 +337,10 @@ class Aplication {
   //   )
   // }
   // }
+
+  updateConnection(answer) {
+    console.log(answer)
+  }
 
   afterConnectionAdd(answer) {
     console.log('you made it')
