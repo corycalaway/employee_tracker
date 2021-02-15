@@ -40,7 +40,7 @@ class Aplication {
     this.idDepartment
     this.infoUpdate
     this.allEmployees = [];
-    
+    this.currentRole
   }
 
   //   startApp() {
@@ -340,7 +340,103 @@ class Aplication {
 
   updateConnection(answer) {
     console.log(answer)
-  }
+    const [employee, department] = answer;
+
+    this.currentEmp = employee
+    this.currentRole = department.department
+    console.log(this.allEmployees)
+    console.log(this.currentEmp)
+
+    connection.promise().query(`SELECT * FROM roles;`)
+        .then(answer => {
+          
+          console.log(this.currentRole)
+          // console.log(deptId)
+          let tempHold, rest;
+          let roleId;
+          [tempHold, rest] = answer
+          roleId = tempHold.indexOf(this.currentRole);
+
+
+          // let deptId = tempHold.map(tr => tr.department_name)
+        
+          console.log(tempHold[1].id)
+          console.log(tempHold)
+          
+          tempHold.forEach(answer => {
+            console.log(answer.title)
+            console.log(this.currentRole)
+            if(answer.title === this.currentRole) {
+              let i;
+              i++
+              console.log(answer.id)
+              console.log('pass')
+              return this.idRole = answer.id
+              // console.log("righthereeeeeeeee")
+              // console.log(this.idDepartment)
+            } else {
+              return console.log('fail')
+            }
+          })
+          // .then(() => {
+            connection.promise().query(`SELECT * FROM employee;`)
+        .then(answer => {
+          console.log('+++++++++++++++')
+          console.log(this.currentRole)
+          // console.log(deptId)
+          let tempHold, rest;
+          let roleId;
+          [tempHold, rest] = answer
+          roleId = tempHold.indexOf(this.currentRole);
+
+
+          // let deptId = tempHold.map(tr => tr.department_name)
+          console.log('=================id==================')
+          console.log(tempHold[1].id)
+          console.log(tempHold)
+          
+          tempHold.forEach(answer => {
+            console.log(answer.title)
+            console.log(this.currentRole)
+            if(answer.title === this.currentRole) {
+              let i;
+              i++
+              console.log(answer.id)
+              console.log('pass')
+              return this.idRole = answer.id
+              // console.log("righthereeeeeeeee")
+              // console.log(this.idDepartment)
+            } else {
+              return console.log('fail')
+            }
+          // })
+
+
+          })
+        })
+          
+
+          // connection.query(`UPDATE employee SET ? WHERE ?`,
+          
+          //   {
+          //     first_name: firstName.firstName,
+          //     last_name: lastName.lastName,
+          //     role_id: this.idRole
+          //     // department_id: 
+          //   },
+          //   function (err, res) {
+          //     if (err) throw err;
+
+          //   }
+
+
+          // )
+          
+  })
+
+  
+  
+}
 
   afterConnectionAdd(answer) {
     console.log('you made it')
