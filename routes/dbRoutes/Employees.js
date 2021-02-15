@@ -8,6 +8,7 @@ class Database {
     constructor() {
         this.dataSaved = [];
         this.department = [];
+        this.dataSavedEmployee = [];
     }
 
     // function to add a department db
@@ -66,7 +67,7 @@ class Database {
     }
 
     // function to add employee to db
-    addEmployee() {
+    addEmployee(array) {
 
         return inquirer.prompt({
             type: "input",
@@ -90,15 +91,15 @@ class Database {
                 return inquirer.prompt({
                     type: "list",
                     name: "department",
-                    message: "Select a department for role",
-                    choices: ['Sales', 'Legal', 'Finance', 'Engineering']
+                    message: "Select a role to assign Employee too.",
+                    choices: array
                 })
                 //  return answer.addNewDepartment;
             })
             .then((answer) => {
 
-                this.dataSaved.push(answer)
-                return this.dataSaved;
+                this.dataSavedEmployee.push(answer)
+                return this.dataSavedEmployee;
             })
     
     }

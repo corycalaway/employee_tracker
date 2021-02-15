@@ -35,8 +35,10 @@ class Aplication {
     this.task
     this.department
     this.departments = [];
+    this.roles = [];
     this.currentDept
     this.idDepartment
+    
   }
 
   //   startApp() {
@@ -66,14 +68,46 @@ class Aplication {
         [tempHold, rest] = answer
 
         // console.log(tempHold.map(tr => tr.department_name))
-        this.departments = tempHold.map(tr => tr.department_name)
+        return this.departments = tempHold.map(tr => tr.department_name)
         // return console.log(JSON.stringify(tempHold))
-      }).then(() =>
+      })
+      .then(() => {
+
+        return this.roles = connection.promise().query(`SELECT title FROM roles;`)
+      })
+      .then(answer => {
+        let tempHold, rest;
+        //
+        [tempHold, rest] = answer
+
+        // console.log(tempHold.map(tr => tr.department_name))
+        return this.roles = tempHold.map(tr => tr.title)
+        // return console.log(JSON.stringify(tempHold))
+      })
+      
+      .then(() =>
         // console.log(this.departments))
 
         this.dbQuestions())
     // console.log(this.departments))
   }
+  // updateInfo() {
+
+  //   this.departments = connection.promise().query(`SELECT department_name FROM department;`)
+  //     .then(answer => {
+  //       let tempHold, rest;
+  //       //
+  //       [tempHold, rest] = answer
+
+  //       // console.log(tempHold.map(tr => tr.department_name))
+  //       this.departments = tempHold.map(tr => tr.department_name)
+  //       // return console.log(JSON.stringify(tempHold))
+  //     }).then(() =>
+  //       // console.log(this.departments))
+
+  //       this.dbQuestions())
+  //   // console.log(this.departments))
+  // }
 
   startApp() {
     console.log(logo({
@@ -183,7 +217,7 @@ class Aplication {
 
             // this.getAllRoles().then(res => {
 
-            console.log(this.departments)
+            console.log(this.roles)
             //   // res.map()
             // })
             // let departments;
@@ -193,7 +227,7 @@ class Aplication {
             // })
 
             //  .then(() => {
-            return this.addInfo = new Database().addEmployee(this.departments)
+            return this.addInfo = new Database().addEmployee(this.roles)
               // //     // departments.push(res.sql)
               //  })
 
@@ -379,12 +413,12 @@ class Aplication {
       console.log('-----------------------------------')
       // console.log(roleName.roleName)
       // console.log(salary.salary)
-      this.currentDept = department.department_id
+      this.currentRole = department.department_id
       console.log(this.currentDept)
       // console.log(answer + 'here')
       // console.log(JSON.stringify(answer))
       // console.log(this.departments)
-      connection.promise().query(`SELECT * FROM department;`)
+      connection.promise().query(`SELECT * FROM roles;`)
         .then(answer => {
           console.log('+++++++++++++++')
           console.log(this.currentDept)
@@ -438,8 +472,10 @@ class Aplication {
           )
     })
   }
-
-}}
+  this.updateInfo();
+}
+  
+}
 
 // sample join
 // afterConnection = (search) => {
