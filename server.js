@@ -333,23 +333,14 @@ class Aplication {
       )
 
     } else if (this.task === 'roles') {
-      // let roleInfo = JSON.stringify(answer)
-      // console.log(roleInfo)
-      // const [roleName, salary, department] = roleInfo;
+    
       const [roleName, salary, department] = answer;
-      console.log('-----------------------------------')
-      // console.log(roleName.roleName)
-      // console.log(salary.salary)
+   
       this.currentDept = department.department_id
-      console.log(this.currentDept)
-      // console.log(answer + 'here')
-      // console.log(JSON.stringify(answer))
-      // console.log(this.departments)
+      
       connection.promise().query(`SELECT * FROM department;`)
         .then(answer => {
-          console.log('+++++++++++++++')
-          console.log(this.currentDept)
-          // console.log(deptId)
+          
           let tempHold, rest;
           let deptId;
           [tempHold, rest] = answer
@@ -405,44 +396,45 @@ class Aplication {
 
       // let roleInfo = JSON.stringify(answer)
 
-
+      console.log(answer)
 
       // console.log(roleInfo)
       // const [roleName, salary, department] = roleInfo;
-      const [roleName, salary, department] = answer;
+      const [firstName, lastName, department] = answer;
+      
       console.log('-----------------------------------')
       // console.log(roleName.roleName)
       // console.log(salary.salary)
-      this.currentRole = department.department_id
-      console.log(this.currentDept)
+      this.currentRole = department.department
+      console.log(this.currentRole)
       // console.log(answer + 'here')
       // console.log(JSON.stringify(answer))
       // console.log(this.departments)
       connection.promise().query(`SELECT * FROM roles;`)
         .then(answer => {
           console.log('+++++++++++++++')
-          console.log(this.currentDept)
+          console.log(this.currentRole)
           // console.log(deptId)
           let tempHold, rest;
-          let deptId;
+          let roleId;
           [tempHold, rest] = answer
-          deptId = tempHold.indexOf(this.currentDept);
+          roleId = tempHold.indexOf(this.currentRole);
 
 
           // let deptId = tempHold.map(tr => tr.department_name)
           console.log('=================id==================')
-          console.log(tempHold[1].department_name + tempHold[1].id )
+          console.log(tempHold[1].id)
           console.log(tempHold)
           
           tempHold.forEach(answer => {
-            console.log(answer.department_name)
-            console.log(this.currentDept)
-            if(answer.department_name === this.currentDept) {
+            console.log(answer.title)
+            console.log(this.currentRole)
+            if(answer.title === this.currentRole) {
               let i;
               i++
               console.log(answer.id)
               console.log('pass')
-              return this.idDepartment = answer.id
+              return this.idRole = answer.id
               // console.log("righthereeeeeeeee")
               // console.log(this.idDepartment)
             } else {
@@ -455,12 +447,12 @@ class Aplication {
           
           // console.log(deptId)
           // let deptId = this.departments[]
-          connection.query(`INSERT INTO roles SET ?`,
+          connection.query(`INSERT INTO employee SET ?`,
           
             {
-              title: roleName.roleName,
-              salary: salary.salary,
-              department_id: this.idDepartment
+              first_name: firstName.firstName,
+              last_name: lastName.lastName,
+              role_id: this.idRole
               // department_id: 
             },
             function (err, res) {

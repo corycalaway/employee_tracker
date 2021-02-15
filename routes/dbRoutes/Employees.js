@@ -77,9 +77,9 @@ class Database {
 
         )
             .then((answer) => {
-                this.dataSaved.push(answer)
+                this.dataSavedEmployee.push(answer)
                 return inquirer.prompt({
-                    type: "number",
+                    type: "input",
                     name: "lastName",
                     message: "Enter new Employees last name."
                 })
@@ -87,7 +87,7 @@ class Database {
             })
 
             .then((answer) => {
-                this.dataSaved.push(answer)
+                this.dataSavedEmployee.push(answer)
                 return inquirer.prompt({
                     type: "list",
                     name: "department",
