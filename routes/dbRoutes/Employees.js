@@ -105,8 +105,14 @@ class Database {
     }
 
     // function to update employee in db
-    updateEmployee() {
-
+    updateEmployee(array) {
+        console.log('check')
+        return inquirer.prompt({
+            type: "list",
+                    name: "department",
+                    message: "Select new role for employee",
+                    choices: array
+        })
     }
 
     // view all departments function
@@ -134,7 +140,7 @@ class Database {
     viewEmployees() {
 
 
-        return `SELECT employee.first_name, employee.last_name, employee.id, roles.title, roles.salary, department.department_name
+        return `SELECT employee.first_name, employee.last_name, employee.id, roles.title, roles.salary, department.department_name, employee.manager_id
               FROM employee
               INNER JOIN roles ON employee.role_id = roles.id
               INNER JOIN department ON roles.department_id = department.id

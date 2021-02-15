@@ -38,6 +38,7 @@ class Aplication {
     this.roles = [];
     this.currentDept
     this.idDepartment
+    this.infoUpdate
     
   }
 
@@ -124,7 +125,7 @@ class Aplication {
         type: "list",
         name: "DBOptions",
         message: "What would you like to do?",
-        choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add employee", "Update Employee", "EXIT"],
+        choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add employee", "Update Employee Role", "EXIT"],
       }).then(answer => {
 
 
@@ -240,9 +241,10 @@ class Aplication {
                 return this.afterConnectionAdd(answer);
               })
 
-          case "Update Employee":
-            console.log(answer.DBOptions)
-            return connection.end();
+          case "Update Employee Role":
+
+            this.task = 'updateEmployee'
+            return this.infoUpdate = new Database().updateEmployee(this.roles)
 
           case "EXIT":
             console.log(answer.DBOptions)
