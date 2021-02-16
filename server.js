@@ -28,6 +28,8 @@ class Aplication {
     this.infoUpdate
     this.allEmployees = [];
     this.currentRole
+    this.idEmp
+    this.idRole
   }
 
   updateInfo() {
@@ -168,7 +170,7 @@ class Aplication {
     console.log(answer)
     const [employee, department] = answer;
 
-    this.currentEmp = employee
+    this.currentEmp = employee.employee
     this.currentRole = department.department
     console.log(this.allEmployees)
     console.log(this.currentEmp)
@@ -208,12 +210,14 @@ class Aplication {
         connection.promise().query(`SELECT * FROM employee;`)
           .then(answer => {
             console.log('+++++++++++++++')
+            console.log(this.allEmployees)
             console.log(this.currentRole)
+            console.log(this.currentEmp)
             // console.log(deptId)
             let tempHold, rest;
-            let roleId;
+            let employeeIds ;
             [tempHold, rest] = answer
-            roleId = tempHold.indexOf(this.currentRole);
+            employeeIds = tempHold.indexOf(this.currentRole);
 
 
             // let deptId = tempHold.map(tr => tr.department_name)
@@ -222,14 +226,16 @@ class Aplication {
             console.log(tempHold)
 
             tempHold.forEach(answer => {
-              console.log(answer.title)
-              console.log(this.currentRole)
-              if (answer.title === this.currentRole) {
+              console.log(answer.first_name + ' ' + answer.last_name)
+              console.log('hereeeeeeee')
+              console.log(this.currentEmp)
+              // creates a pass if the employee selected = then looks for row to index later
+              if (answer.first_name + ' ' + answer.last_name === this.currentEmp) {
                 let i;
                 i++
                 console.log(answer.id)
                 console.log('pass')
-                return this.idRole = answer.id
+                return this.idEmp = answer.id
               } else {
                 return console.log('fail')
               }
