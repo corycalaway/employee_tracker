@@ -265,21 +265,6 @@ class Aplication {
           )
             this.updateInfo();
           })
-
-          // connection.query(`INSERT INTO employee SET ?`,
-
-          //   {
-          //     first_name: firstName.firstName,
-          //     last_name: lastName.lastName,
-          //     role_id: this.idRole
-          //   },
-          //   function (err, res) {
-          //     if (err) throw err;
-
-          //   }
-
-
-          // )
       })
     
 
@@ -403,7 +388,6 @@ connection.connect(err => {
   if (err) throw err;
   console.log('connected as id ' + connection.threadId);
   new Aplication().startApp()
-  // runSequence();
 
 });
 
