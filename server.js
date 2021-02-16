@@ -241,10 +241,29 @@ class Aplication {
               }
 
             })
+
+            // updated employee and role id's
+            console.log(this.idRole + 'role ID')
+            console.log(this.idEmp + 'employee ID')
+            this.updateInfo();
           })
 
-      })
+          // connection.query(`INSERT INTO employee SET ?`,
 
+          //   {
+          //     first_name: firstName.firstName,
+          //     last_name: lastName.lastName,
+          //     role_id: this.idRole
+          //   },
+          //   function (err, res) {
+          //     if (err) throw err;
+
+          //   }
+
+
+          // )
+      })
+    
 
 
   }
