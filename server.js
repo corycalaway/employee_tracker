@@ -245,6 +245,24 @@ class Aplication {
             // updated employee and role id's
             console.log(this.idRole + 'role ID')
             console.log(this.idEmp + 'employee ID')
+
+            connection.query(`UPDATE employee SET ? WHERE ?`,
+
+            [
+              {
+              role_id: this.idRole
+            },
+            {
+              id: this.idEmp
+            }
+          ],
+            function (err, res) {
+              if (err) throw err;
+
+            }
+
+
+          )
             this.updateInfo();
           })
 
