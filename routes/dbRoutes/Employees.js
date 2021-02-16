@@ -28,11 +28,6 @@ class Database {
 
     // function to add a role to db
     addRole(array) {
-        // this.department = connection.query(`SELECT department_name FROM department;`, function (err, res) {
-        //        if (err) throw err;
-        //        return res.json()
-        //     })
-        console.log(array)
         return inquirer.prompt({
             type: "input",
             name: "roleName",
@@ -102,33 +97,32 @@ class Database {
                 this.dataSavedEmployee.push(answer)
                 return this.dataSavedEmployee;
             })
-    
+
     }
 
     // function to update employee in db
     updateEmployee(arrayEmp, arrayDep) {
-        console.log('check')
         return inquirer.prompt({
             type: "list",
-                    name: "employee",
-                    message: "Select employee to update role",
-                    choices: arrayEmp
+            name: "employee",
+            message: "Select employee to update role",
+            choices: arrayEmp
         })
-        .then((answer) => {
-            this.dataUpdateEmployee.push(answer)
-            return inquirer.prompt({
-                type: "list",
+            .then((answer) => {
+                this.dataUpdateEmployee.push(answer)
+                return inquirer.prompt({
+                    type: "list",
                     name: "department",
                     message: "Select new role for employee",
                     choices: arrayDep
+                })
+                //  return answer.addNewDepartment;
             })
-            //  return answer.addNewDepartment;
-        })
-        .then((answer) => {
+            .then((answer) => {
 
-            this.dataUpdateEmployee.push(answer)
-            return this.dataUpdateEmployee;
-        })
+                this.dataUpdateEmployee.push(answer)
+                return this.dataUpdateEmployee;
+            })
     }
 
     // view all departments function
@@ -139,12 +133,6 @@ class Database {
     // view all roles function
     viewRoles() {
 
-        // remove employee and change employee role id to rolesid
-        // return `SELECT employee.role_id, roles.title, roles.salary, department.department_name
-        // FROM employee
-        // RIGHT JOIN roles ON employee.role_id = roles.id
-        // LEFT JOIN department ON roles.department_id = department.id
-        // ORDER BY roles.title ASC;`
         return `SELECT roles.id, roles.title, roles.salary, department.department_name
         FROM roles
         LEFT JOIN department ON roles.department_id = department.id
@@ -152,9 +140,8 @@ class Database {
 
 
     }
-    // view all emplohees function
-    viewEmployees() {
 
+    viewEmployees() {
 
         return `SELECT employee.first_name, employee.last_name, employee.id, roles.title, roles.salary, department.department_name, employee.manager_id
               FROM employee

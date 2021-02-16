@@ -58,7 +58,6 @@ class Aplication {
       .then(answer => {
         let tempHold, rest;
         [tempHold, rest] = answer
-        console.log(tempHold)
 
         return this.allEmployees = tempHold.map(tr => tr.first_name + ' ' + tr.last_name)
       })
@@ -111,19 +110,15 @@ class Aplication {
             return this.addInfo = new Database().addRole(this.departments)
 
               .then((answer) => {
-                console.log(answer)
                 return this.afterConnectionAdd(answer);
               })
 
           case "Add employee":
             this.task = 'employee'
 
-            console.log(this.roles)
-
             return this.addInfo = new Database().addEmployee(this.roles)
 
               .then((answer) => {
-                console.log(answer)
                 return this.afterConnectionAdd(answer);
               })
 
@@ -133,12 +128,10 @@ class Aplication {
             return this.infoUpdate = new Database().updateEmployee(this.allEmployees, this.roles)
 
               .then((answer) => {
-                console.log(answer)
                 return this.updateConnection(answer);
               })
 
           case "EXIT":
-            console.log(answer.DBOptions)
             return connection.end();
 
 
@@ -155,10 +148,8 @@ class Aplication {
 
 
   afterConnection() {
-    console.log('yay')
     connection.query(this.search, function (err, res) {
       if (err) throw err;
-      console.log(res);
       console.table(res)
       new Aplication().updateInfo();
     });
@@ -167,106 +158,70 @@ class Aplication {
 
 
   updateConnection(answer) {
-    console.log(answer)
     const [employee, department] = answer;
 
     this.currentEmp = employee.employee
     this.currentRole = department.department
-    console.log(this.allEmployees)
-    console.log(this.currentEmp)
 
     connection.promise().query(`SELECT * FROM roles;`)
       .then(answer => {
 
-        console.log(this.currentRole)
-        // console.log(deptId)
         let tempHold, rest;
         let roleId;
         [tempHold, rest] = answer
         roleId = tempHold.indexOf(this.currentRole);
 
-
-        // let deptId = tempHold.map(tr => tr.department_name)
-
-        console.log(tempHold[1].id)
-        console.log(tempHold)
-
         tempHold.forEach(answer => {
-          console.log(answer.title)
-          console.log(this.currentRole)
           if (answer.title === this.currentRole) {
             let i;
             i++
-            console.log(answer.id)
-            console.log('pass')
             return this.idRole = answer.id
-            // console.log("righthereeeeeeeee")
-            // console.log(this.idDepartment)
           } else {
-            return console.log('fail')
+            return
           }
         })
         // .then(() => {
         connection.promise().query(`SELECT * FROM employee;`)
           .then(answer => {
-            console.log('+++++++++++++++')
-            console.log(this.allEmployees)
-            console.log(this.currentRole)
-            console.log(this.currentEmp)
-            // console.log(deptId)
             let tempHold, rest;
-            let employeeIds ;
+            let employeeIds;
             [tempHold, rest] = answer
             employeeIds = tempHold.indexOf(this.currentRole);
 
-
-            // let deptId = tempHold.map(tr => tr.department_name)
-            console.log('=================id==================')
-            console.log(tempHold[1].id)
-            console.log(tempHold)
-
             tempHold.forEach(answer => {
-              console.log(answer.first_name + ' ' + answer.last_name)
-              console.log('hereeeeeeee')
-              console.log(this.currentEmp)
+
               // creates a pass if the employee selected = then looks for row to index later
               if (answer.first_name + ' ' + answer.last_name === this.currentEmp) {
                 let i;
                 i++
-                console.log(answer.id)
-                console.log('pass')
                 return this.idEmp = answer.id
               } else {
-                return console.log('fail')
+                return
               }
 
             })
 
-            // updated employee and role id's
-            console.log(this.idRole + 'role ID')
-            console.log(this.idEmp + 'employee ID')
-
             connection.query(`UPDATE employee SET ? WHERE ?`,
 
-            [
-              {
-              role_id: this.idRole
-            },
-            {
-              id: this.idEmp
-            }
-          ],
-            function (err, res) {
-              if (err) throw err;
+              [
+                {
+                  role_id: this.idRole
+                },
+                {
+                  id: this.idEmp
+                }
+              ],
+              function (err, res) {
+                if (err) throw err;
 
-            }
+              }
 
 
-          )
+            )
             this.updateInfo();
           })
       })
-    
+
 
 
   }
@@ -300,8 +255,6 @@ class Aplication {
           deptId = tempHold.indexOf(this.currentDept);
 
           tempHold.forEach(answer => {
-            console.log(answer.department_name)
-            console.log(this.currentDept)
             if (answer.department_name === this.currentDept) {
               let i;
               i++
@@ -330,8 +283,6 @@ class Aplication {
 
     } else if (this.task === 'employee') {
 
-      console.log(answer)
-
       const [firstName, lastName, department] = answer;
 
       this.currentRole = department.department
@@ -342,12 +293,6 @@ class Aplication {
           let roleId;
           [tempHold, rest] = answer
           roleId = tempHold.indexOf(this.currentRole);
-
-
-          // let deptId = tempHold.map(tr => tr.department_name)
-          console.log('=================id==================')
-          console.log(tempHold[1].id)
-          console.log(tempHold)
 
           tempHold.forEach(answer => {
 
@@ -386,7 +331,6 @@ class Aplication {
 
 connection.connect(err => {
   if (err) throw err;
-  console.log('connected as id ' + connection.threadId);
   new Aplication().startApp()
 
 });
